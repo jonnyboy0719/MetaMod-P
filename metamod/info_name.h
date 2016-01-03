@@ -50,7 +50,7 @@
 #define RC_DESC			"Metamod-P Half-Life MOD DLL"
 #define RC_FILENAME		"METAMOD.DLL"
 #define RC_INTERNAL		"METAMOD-P"
-#define RC_COPYRIGHT		"Copyright© 2001-" COPYRIGHT_YEAR  " Will Day; 2004-" VPATCH_COPYRIGHT_YEAR " Jussi Kivilinna; GPL licensed"
+#define RC_COPYRIGHT		"Copyright© 2001-" COPYRIGHT_YEAR  " Will Day; 2004-2013 Jussi Kivilinna; 2015-" VPATCH_COPYRIGHT_YEAR " Johan Ehrendahl; GPL licensed"
 #define RC_LICENSE		"Licensed under the GNU General Public License"
 
 #endif /* INFO_NAME_H */
