@@ -36,11 +36,13 @@
 // This is conveniently done for them in extdll.h
 //
 
+/*
 #ifdef _WIN32
 #define DLLEXPORT __stdcall
 #else
-#define DLLEXPORT /* */
+#define DLLEXPORT  __attribute__ ((visibility("default")))
 #endif
+*/
 
 typedef enum
 	{
@@ -166,13 +168,8 @@ typedef struct enginefuncs_s
 	void		(*pfnCVarSetFloat)			(const char *szVarName, float flValue);
 	void		(*pfnCVarSetString)			(const char *szVarName, const char *szValue);
 	void		(*pfnAlertMessage)			(ALERT_TYPE atype, char *szFmt, ...);
-#ifdef HLSDK_3_2_OLD_EIFACE
-	void		(*pfnEngineFprintf)			(FILE *pfile, char *szFmt, ...);
-	void*		(*pfnPvAllocEntPrivateData)	(edict_t *pEdict, long cb);
-#else
 	void		(*pfnEngineFprintf)			(void *pfile, char *szFmt, ...);
 	void*		(*pfnPvAllocEntPrivateData)	(edict_t *pEdict, int32 cb);
-#endif
 	void*		(*pfnPvEntPrivateData)		(edict_t *pEdict);
 	void		(*pfnFreeEntPrivateData)	(edict_t *pEdict);
 	const char*	(*pfnSzFromIndex)			(int iString);
@@ -187,13 +184,8 @@ typedef struct enginefuncs_s
 	int			(*pfnRegUserMsg)			(const char *pszName, int iSize);
 	void		(*pfnAnimationAutomove)		(const edict_t* pEdict, float flTime);
 	void		(*pfnGetBonePosition)		(const edict_t* pEdict, int iBone, float *rgflOrigin, float *rgflAngles );
-#ifdef HLSDK_3_2_OLD_EIFACE
-	unsigned long (*pfnFunctionFromName)	( const char *pName );
-	const char *(*pfnNameForFunction)		( unsigned long function );
-#else
 	uint32 (*pfnFunctionFromName)	( const char *pName );
 	const char *(*pfnNameForFunction)		( uint32 function );
-#endif
 	void		(*pfnClientPrintf)			( edict_t* pEdict, PRINT_TYPE ptype, const char *szMsg ); // JOHN: engine callbacks so game DLL can print messages to individual clients
 	void		(*pfnServerPrint)			( const char *szMsg );
 	const char *(*pfnCmd_Args)				( void );		// these 3 added 
@@ -204,11 +196,7 @@ typedef struct enginefuncs_s
 	void        (*pfnCRC32_ProcessBuffer)   (CRC32_t *pulCRC, void *p, int len);
 	void		(*pfnCRC32_ProcessByte)     (CRC32_t *pulCRC, unsigned char ch);
 	CRC32_t		(*pfnCRC32_Final)			(CRC32_t pulCRC);
-#ifdef HLSDK_3_2_OLD_EIFACE
-	long		(*pfnRandomLong)			(long  lLow,  long  lHigh);
-#else
 	int32		(*pfnRandomLong)			(int32  lLow,  int32  lHigh);
-#endif
 	float		(*pfnRandomFloat)			(float flLow, float flHigh);
 	void		(*pfnSetView)				(const edict_t *pClient, const edict_t *pViewent );
 	float		(*pfnTime)					( void );
@@ -281,43 +269,42 @@ typedef struct enginefuncs_s
 	const char *(*pfnGetPlayerAuthId)		( edict_t *e );
 
 	// PSV: Added for CZ training map
-//	const char *(*pfnKeyNameForBinding)					( const char* pBinding );
+//	const char *(*pfnKeyNameForBinding)		( const char* pBinding );
 	
-	sequenceEntry_s*	(*pfnSequenceGet)				( const char* fileName, const char* entryName );
-	sentenceEntry_s*	(*pfnSequencePickSentence)		( const char* groupName, int pickMethod, int *picked );
+	sequenceEntry_s*	(*pfnSequenceGet)			( const char* fileName, const char* entryName );
+	sentenceEntry_s*	(*pfnSequencePickSentence)	( const char* groupName, int pickMethod, int *picked );
 
 	// LH: Give access to filesize via filesystem
-	int			(*pfnGetFileSize)						( char *filename );
+	int			(*pfnGetFileSize)			( char *filename );
 
-	unsigned int (*pfnGetApproxWavePlayLen)				(const char *filepath);
+	unsigned int (*pfnGetApproxWavePlayLen) (const char *filepath);
 	// MDC: Added for CZ career-mode
-	int			(*pfnIsCareerMatch)						( void );
+	int			(*pfnIsCareerMatch)			( void );
 
 	// BGC: return the number of characters of the localized string referenced by using "label"
-	int			(*pfnGetLocalizedStringLength)			(const char *label);
+	int			(*pfnGetLocalizedStringLength)(const char *label);
 
 	// BGC: added to facilitate persistent storage of tutor message decay values for
 	// different career game profiles.  Also needs to persist regardless of mp.dll being
 	// destroyed and recreated.
-	void		(*pfnRegisterTutorMessageShown)			(int mid);
-	int			(*pfnGetTimesTutorMessageShown)			(int mid);
-	void		(*pfnProcessTutorMessageDecayBuffer)	(int *buffer, int bufferLength);
-	void		(*pfnConstructTutorMessageDecayBuffer)	(int *buffer, int bufferLength);
-	void		(*pfnResetTutorMessageDecayData)		( void );
-	
-	// Added 2005/08/11 (no SDK update):
-	void		(*pfnQueryClientCvarValue)		(const edict_t *player, const char *cvarName);  
+	void (*pfnRegisterTutorMessageShown)(int mid);
+	int (*pfnGetTimesTutorMessageShown)(int mid);
+	void (*pfnProcessTutorMessageDecayBuffer)(int *buffer, int bufferLength);
+	void (*pfnConstructTutorMessageDecayBuffer)(int *buffer, int bufferLength);
+	void (*pfnResetTutorMessageDecayData)( void );
 
-	// Added 2005/11/21 (no SDK update):
-	void		(*pfnQueryClientCvarValue2)		(const edict_t *player, const char *cvarName, int requestID);
+	void (*pfnQueryClientCvarValue)( const edict_t *player, const char *cvarName );
+	void (*pfnQueryClientCvarValue2)( const edict_t *player, const char *cvarName, int requestID );
+	int (*pfnEngCheckParm)( const char *pchCmdLineToken, char **ppnext );
 
-	// Added 2009/06/19 (no SDK update):
-	int 		(*pfnEngCheckParm)			(const char *pchCmdLineToken, char **pchNextVal);
+	// AdamR: New functions to get the number of models precached (18/Feb/2015)
+	int	( *pfnNumberOfPrecachedModels )	( void );
 
 #ifdef __METAMOD_BUILD__
 	//extra (future updates)
 	void * extra_functions[16];
 #endif /*__METAMOD_BUILD__*/
+
 } enginefuncs_t;
 
 
@@ -329,11 +316,7 @@ typedef struct KeyValueData_s
 	char	*szClassName;	// in: entity classname
 	char	*szKeyName;		// in: name of key
 	char	*szValue;		// in: value of key
-#ifdef HLSDK_3_2_OLD_EIFACE
-	long	fHandled;		// out: DLL sets to true if key-value pair was understood
-#else
 	int32	fHandled;		// out: DLL sets to true if key-value pair was understood
-#endif
 } KeyValueData;
 
 
@@ -420,10 +403,9 @@ typedef enum _fieldtypes
 	FIELD_TYPECOUNT,		// MUST BE LAST
 } FIELDTYPE;
 
-#ifndef linux
-#ifndef offsetof
+//On windows, offsetof is defined in stddef.h, included by cstddef (included by tons of headers)
+#if !defined(offsetof)  && !defined(GNUC) && !defined( WIN32 )
 #define offsetof(s,m)	(size_t)&(((s *)0)->m)
-#endif
 #endif
 
 #define _FIELD(type,name,fieldtype,count,flags)		{ fieldtype, #name, offsetof(type, name), count, flags }
@@ -445,15 +427,8 @@ typedef struct
 	short			flags;
 } TYPEDESCRIPTION;
 
-// Fixed MSVC compiling, by Nikolay "The Storm" Baklicharov.
-#if defined _MSC_VER && _MSC_VER >= 1400
-	#ifndef ARRAYSIZE
-		#define ARRAYSIZE(p)		(sizeof(p)/sizeof(p[0]))
-	#endif
-#else /* MSVC 8.0 */
-	#ifndef ARRAYSIZE
-		#define ARRAYSIZE(p)		(sizeof(p)/sizeof(p[0]))
-	#endif
+#ifndef ARRAYSIZE
+#define ARRAYSIZE(p)		(sizeof(p)/sizeof(p[0]))
 #endif
 
 typedef struct 
@@ -541,6 +516,8 @@ typedef struct
 	// Most games right now should return 0, until client-side weapon prediction code is written
 	//  and tested for them.
 	int				(*pfnAllowLagCompensation)( void );
+
+	void			(*pfnEndFrame)( void );	//Called at the end of physics processing for a given frame.
 } DLL_FUNCTIONS;
 
 extern DLL_FUNCTIONS		gEntityInterface;
@@ -555,14 +532,8 @@ typedef struct
 	void			(*pfnOnFreeEntPrivateData)(edict_t *pEnt);
 	void			(*pfnGameShutdown)(void);
 	int				(*pfnShouldCollide)( edict_t *pentTouched, edict_t *pentOther );
-	
-	// Added 2005/08/11 (no SDK update):
-	void			(*pfnCvarValue)( const edict_t *pEnt, const char *value ); 
-	
-	// Added 2005/11/21 (no SDK update):
-	//    value is "Bad CVAR request" on failure (i.e that user is not connected or the cvar does not exist).
-	//    value is "Bad Player" if invalid player edict.
-	void                    (*pfnCvarValue2)( const edict_t *pEnt, int requestID, const char *cvarName, const char *value );
+	void			(*pfnCvarValue)( const edict_t *pEnt, const char *value );
+	void			(*pfnCvarValue2)( const edict_t *pEnt, int requestID, const char *cvarName, const char *value );
 } NEW_DLL_FUNCTIONS;
 typedef int	(*NEW_DLL_FUNCTIONS_FN)( NEW_DLL_FUNCTIONS *pFunctionTable, int *interfaceVersion );
 
@@ -572,4 +543,4 @@ extern NEW_DLL_FUNCTIONS	gNewDLLFunctions;
 typedef int	(*APIFUNCTION)( DLL_FUNCTIONS *pFunctionTable, int interfaceVersion );
 typedef int	(*APIFUNCTION2)( DLL_FUNCTIONS *pFunctionTable, int *interfaceVersion );
 
-#endif /* EIFACE_H */
+#endif EIFACE_H

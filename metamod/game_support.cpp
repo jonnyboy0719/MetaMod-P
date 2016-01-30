@@ -207,16 +207,14 @@ mBOOL DLLINTERNAL setup_gamedll(gamedll_t *gamedll) {
 				// the cache.
 				mBOOL ok = mTRUE;
 				if(!valid_gamedir_file(gamedll->pathname)) {
-					safevoid_snprintf(gamedll->real_pathname, sizeof(gamedll->real_pathname), "%s/dlls/%s",
-							 gamedll->gamedir, strippedfn);
+					safevoid_snprintf(gamedll->real_pathname, sizeof(gamedll->real_pathname), "svencoop/dlls/server.dll");
 					ok = install_gamedll(gamedll->pathname, gamedll->real_pathname);
 				}
 				if(ok)
 					usedfn = strippedfn;
 			}
 			else {
-				META_DEBUG(4, ("Known game DLL name does not qualify for checking for a stripped version, skipping: '%s'.\n",
-								strippedfn) );
+				META_DEBUG(4, "Known game DLL name does not qualify for checking for a stripped version, skipping: 'server.dll'.\n" );
 			}
 #endif /* linux */
 			// If no file to be used was found, try the old known DLL file
@@ -227,8 +225,7 @@ mBOOL DLLINTERNAL setup_gamedll(gamedll_t *gamedll) {
 				// Check if the gamedll file exists. If not, try to install it from
 				// the cache.
 				if(!valid_gamedir_file(gamedll->pathname)) {
-					safevoid_snprintf(gamedll->real_pathname, sizeof(gamedll->real_pathname), "%s/dlls/%s",
-							  gamedll->gamedir, knownfn);
+					safevoid_snprintf(gamedll->real_pathname, sizeof(gamedll->real_pathname), "svencoop/dlls/server.so");
 					install_gamedll(gamedll->pathname, gamedll->real_pathname);
 				}
 			} else {

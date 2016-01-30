@@ -329,7 +329,8 @@ meta_enginefuncs_t::meta_enginefuncs_t(
 	void             (*_pfnResetTutorMessageDecayData)      (void),
 	void             (*_pfnQueryClientCvarValue)            (const edict_t*, const char*),
 	void             (*_pfnQueryClientCvarValue2)           (const edict_t*, const char*, int),
-	int             (*_pfnEngCheckParm)           		(const char*, char**)
+	int             (*_pfnEngCheckParm)           		(const char*, char**),
+	int				(*_pfnNumberOfPrecachedModels)		(void)
     )
 {
 	pfnPrecacheModel = _pfnPrecacheModel;
@@ -490,6 +491,7 @@ meta_enginefuncs_t::meta_enginefuncs_t(
 	pfnQueryClientCvarValue = _pfnQueryClientCvarValue;
 	pfnQueryClientCvarValue2 = _pfnQueryClientCvarValue2;
 	pfnEngCheckParm = _pfnEngCheckParm;
+	pfnNumberOfPrecachedModels = _pfnNumberOfPrecachedModels;
 
 	memset( extra_functions, 0, sizeof(extra_functions));
 

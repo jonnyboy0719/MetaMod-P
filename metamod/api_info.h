@@ -117,6 +117,7 @@ typedef struct dllapi_info_s {
 	api_info_t pfnCreateInstancedBaselines;
 	api_info_t pfnInconsistentFile;
 	api_info_t pfnAllowLagCompensation;
+	api_info_t pfnEndFrame;
 	api_info_t END;
 } dllapi_info_t;
 

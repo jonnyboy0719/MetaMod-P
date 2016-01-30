@@ -109,6 +109,7 @@ typedef int (*FN_GETHULLBOUNDS) ( int hullnumber, float *mins, float *maxs );
 typedef void (*FN_CREATEINSTANCEDBASELINES)  ( void );
 typedef int (*FN_INCONSISTENTFILE) ( const edict_t *player, const char *filename, char *disconnect_message );
 typedef int (*FN_ALLOWLAGCOMPENSATION) ( void );
+typedef void (*FN_ENDFRAME) ( void );
 
 typedef void (*FN_ONFREEENTPRIVATEDATA) (edict_t *pEnt);
 typedef void (*FN_GAMESHUTDOWN) (void);

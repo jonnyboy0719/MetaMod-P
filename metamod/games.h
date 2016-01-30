@@ -42,6 +42,7 @@
 #else
 #  define MODARCH "_i386"
 #endif
+
 	{"action",            "ahl"MODARCH".so",          "ahl.dll",           "Action Half-Life"},
 	{"ag",                "ag"MODARCH".so",           "ag.dll",            "Adrenaline Gamer Steam"},
 	{"ag3",               "hl"MODARCH".so",           "hl.dll",            "Adrenalinegamer 3.x"},
@@ -50,7 +51,7 @@
 	{"asheep",            "hl"MODARCH".so",           "hl.dll",            "Azure Sheep"},
 	{"bg",                "bg"MODARCH".so",           "bg.dll",            "The Battle Grounds"},
 	{"bot",               "bot"MODARCH".so",          "bot.dll",           "Bot"},
-	{"brainbread",        "bb"MODARCH".so",           "bb.dll",            "BrainBread"},
+	{"brainbread",        "bb"MODARCH".so",           "bb.dll",            "Brain Bread"},
 	{"bumpercars",        "hl"MODARCH".so",           "hl.dll",            "Bumper Cars"},
 	{"buzzybots",         "bb"MODARCH".so",           "bb.dll",            "BuzzyBots"},
 	{"cs13",              "cs"MODARCH".so",           "mp.dll",            "Counter-Strike 1.3"},
@@ -109,8 +110,7 @@
 	{"si",                "si"MODARCH".so",           "si.dll",            "Science & Industry"},
 	{"snow",              "snow"MODARCH".so",         "snow.dll",          "Snow-War"},
 	{"stargatetc",        "hl"MODARCH".so",           "hl.dll",            "StargateTC"},
-	{ "svencoop", "hl"MODARCH".so", "hl.dll", "Sven Coop [Modification]" },
-	{ "svencoop", "server.so", "server.dll", "Sven Coop [Steam Version]" },	// Will override the the hl.dll if its steam version.
+	{"svencoop",          "hl"MODARCH".so",           "hl.dll",            "Sven Coop"},
 	{"swarm",             "swarm"MODARCH".so",        "swarm.dll",         "Swarm"},
 	{"tfc",               "tfc"MODARCH".so",          "tfc.dll",           "Team Fortress Classic"},
 	{"thewastes",         "thewastes"MODARCH".so",    "thewastes.dll",     "The Wastes"},
@@ -129,10 +129,3 @@
 	{"wizwars",           "mp"MODARCH".so",           "hl.dll",            "Wizard Wars"},
 	{"wormshl",           "wormshl_i586.so",          "wormshl.dll",       "WormsHL"},
 	{"zp",                "none",                     "mp.dll",            "Zombie Panic"},
-	// New Supported Mods
-	{ "ckf3", "none", "mp.dll", "Chicken Fortress 3" },
-	{ "bdef", "../cl_dlls/server.so", "../cl_dlls/server.dll", "Base Defense" },
-	{ "bhl", "none", "bhl.dll", "Brutal Half-Life" },
-	{ "msc", "none", "ms.dll", "Master Sword Continued" },
-	{ "hcfrenzy", "hcfrenzy.so", "hcfrenzy.dll", "Headcrab Frenzy" },
-	{ "recbb2", "recb"MODARCH".so", "recb.dll", "Resident Evil : Cold Blood" },

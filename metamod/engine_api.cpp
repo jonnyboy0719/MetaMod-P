@@ -915,6 +915,11 @@ static int mm_EngCheckParm(const char *pchCmdLineToken, char **pchNextVal) {
 	RETURN_API(int)
 }
 
+static int mm_NumberOfPrecachedModels()
+{
+	return g_engfuncs.pfnNumberOfPrecachedModels();
+}
+
 meta_enginefuncs_t meta_engfuncs (
 	&mm_PrecacheModel,			// pfnPrecacheModel()
 	&mm_PrecacheSound,			// pfnPrecacheSound()
@@ -1126,5 +1131,6 @@ meta_enginefuncs_t meta_engfuncs (
 	&mm_QueryClientCvarValue2,		// pfnQueryClientCvarValue2()
 
 	// Added 2009/06/17 (no SDK update):
-	&mm_EngCheckParm			// pfnEngCheckParm()
+	&mm_EngCheckParm,			// pfnEngCheckParm()
+	&mm_NumberOfPrecachedModels
 );

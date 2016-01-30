@@ -43,15 +43,15 @@
 #endif /* not OPT_TYPE */
 
 
-#define VDATE 			"2016/01/03"
+#define VDATE 			"2016/01/30"
 #define VPATCH_COPYRIGHT_YEAR   "2016"
 #define VMETA_VERSION		"1.3"
 
-#define VPATCH_NAME		"Metamod-P (mm-p)"
+#define VPATCH_NAME		"Metamod-P (mm-p) for SvenCoop 5.0"
 #define VPATCH_IVERSION		38
 #define VPATCH_VERSION		"38"
-#define VPATCH_AUTHOR		"Johan Ehrendahl"
-#define VPATCH_WEBSITE		"https://github.com/jonnyboy0719/MetaMod-P"
+#define VPATCH_AUTHOR		"JonnyBoy0719"
+#define VPATCH_WEBSITE		"https://github.com/jonnyboy0719/MetaMod-P/tree/unstable"
 
 #define VVERSION		VMETA_VERSION "p" VPATCH_VERSION
 #define RC_VERS_DWORD		1,3,0,VPATCH_IVERSION	// Version Windows DLL Resources in res_meta.rc

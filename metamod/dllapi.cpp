@@ -314,6 +314,10 @@ static int mm_AllowLagCompensation(void) {
 	RETURN_API(int);
 }
 
+static void mm_EndFrame(void) {
+	META_DLLAPI_HANDLE_void(FN_ENDFRAME, pfnEndFrame, void, (VOID_ARG));
+	RETURN_API_void();
+}
 
 // New API functions
 // From SDK ?
@@ -408,6 +412,7 @@ static DLL_FUNCTIONS gFunctionTable =
 	mm_CreateInstancedBaselines,	//! pfnCreateInstancedBaselines()	(wd) SDK2
 	mm_InconsistentFile,			//! pfnInconsistentFile()		(wd) SDK2
 	mm_AllowLagCompensation,		//! pfnAllowLagCompensation()	(wd) SDK2
+	mm_EndFrame
 };
 
 DLL_FUNCTIONS *g_pHookedDllFunctions = &gFunctionTable;

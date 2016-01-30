@@ -91,6 +91,7 @@ const dllapi_info_t dllapi_info = {
 	{ mFALSE,  9,	api_caller_void_args_void,	"CreateInstancedBaselines" },	// pfnCreateInstancedBaselines
 	{ mFALSE,  3,	api_caller_int_args_3p,		"InconsistentFile" },	// pfnInconsistentFile
 	{ mFALSE,  20,	api_caller_int_args_void,	"AllowLagCompensation" },	// pfnAllowLagCompensation
+	{ mFALSE,	18, api_caller_void_args_void,	"EndFrame" },
 	{ mFALSE,  0,	NULL, 	NULL },
 };
 
